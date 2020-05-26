@@ -24,6 +24,7 @@ func init() {
 	orm.RegisterModel(new(Test))
 	orm.RegisterModel(new(User))
 	orm.RegisterModel(new(Article))
+	orm.RegisterModel(new(ArticleType))
 	//generate table
 	orm.RunSyncdb("default", false, true)
 }

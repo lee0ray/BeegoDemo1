@@ -6,7 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-
+    <script type="text/javascript">
+        window.onload = function () {
+            $(".dels").click(function () {
+                    if (!confirm("confirm delete?"))
+                    {
+                        return false
+                    }
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -17,7 +26,7 @@
 
 <div class="side_bar">
     <div class="user_info">
-        <img src="/static/img/person.png" alt="张大山">
+        <img src="/static/img/person.jpg" alt="张大山">
         <p>欢迎你 <em>lee</em></p>
     </div>
 
@@ -60,7 +69,7 @@
                     <td><a href="/Content?id={{.Id}}">查看详情</a></td>
                     <td>{{.ATime.Format "2006-01-02 15/04"}}</td>
                     <td>{{.ACount}}</td>
-                    <td><a href="#" class="dels">删除</a></td>
+                    <td><a href="/delete?id={{.Id}}" class="dels">删除</a></td>
                     <td><a href="/Update?id={{.Id}}">编辑</a></td>
                     <td>财经新闻</td>
                 </tr>
@@ -68,11 +77,11 @@
         </table>
 
         <ul class="pagenation">
-            <li><a href="#">首页</a></li>
-            <li><a href="javascript:;">上一页 </a></li>
-            <li><a href="javascript:;">下一页</a></li>
-            <li><a href="#">末页</a></li>
-            <li>共5条记录/共5页/当前1页</li>
+            <li><a href="/Index?pageIndex=1">首页</a></li>
+           {{/* <li><a href="/Index?pageIndex={{.pageIndex | PrePage}}">上一页 </a></li>
+            <li><a href="/Index?pageIndex={{.pageIndex | NextPage}}">下一页</a></li>*/}}
+            <li><a href="/Index?pageIndex={{.pagecount}}">末页</a></li>
+            <li>共{{.count}}条记录/共{{.pagecount}}页/当前1页</li>
         </ul>
     </div>
 </div>
