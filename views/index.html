@@ -9,10 +9,12 @@
     <script type="text/javascript">
         window.onload = function () {
             $(".dels").click(function () {
-                    if (!confirm("confirm delete?"))
-                    {
-                        return false
-                    }
+                if (!confirm("confirm delete?")) {
+                    return false
+                }
+            })
+            $("#select").change(function () {
+                $("#form").submit()
             })
         }
     </script>
@@ -35,7 +37,7 @@
         <ul class="sub_menu show">
             <li><a href="/Index" class="icon031">文章列表</a></li>
             <li><a href="/AddArticle" class="icon032">添加文章</a></li>
-            <li><a href="#" class="icon034">添加分类</a></li>
+            <li><a href="AddType" class="icon034">添加分类</a></li>
         </ul>
     </div>
 </div>
@@ -46,11 +48,15 @@
     </div>
     <div class="pannel">
         <span class="sel_label">请选择文章分类：</span>
-        <select name="select" id="select" class="sel_opt">
-            <option selected="true">财经新闻</option>
-            <option>体育新闻</option>
-            <option>科技新闻</option>
-        </select>
+        <form id="form" method="post" action="/Index">
+
+            <select name="select" id="select" class="sel_opt">
+                {{range .types}}
+                    <option selected="true">{{.TypeName}}</option>
+                {{end}}
+            </select>
+
+        </form>
 
         <table class="common_table">
             <tr>
@@ -63,22 +69,22 @@
                 <th width="10%">文章类型</th>
             </tr>
 
-            {{range .articles}}
+            {{range $index,$val := .articles}}
                 <tr>
-                    <td>{{.AName}}</td>
-                    <td><a href="/Content?id={{.Id}}">查看详情</a></td>
-                    <td>{{.ATime.Format "2006-01-02 15/04"}}</td>
-                    <td>{{.ACount}}</td>
-                    <td><a href="/delete?id={{.Id}}" class="dels">删除</a></td>
-                    <td><a href="/Update?id={{.Id}}">编辑</a></td>
-                    <td>财经新闻</td>
+                    <td>{{$val.AName}}</td>
+                    <td><a href="/Content?id={{$val.Id}}">查看详情</a></td>
+                    <td>{{$val.ATime.Format "2006-01-02 15/04"}}</td>
+                    <td>{{$val.ACount}}</td>
+                    <td><a href="/delete?id={{$val.Id}}" class="dels">删除</a></td>
+                    <td><a href="/Update?id={{$val.Id}}">编辑</a></td>
+                    <td>{{$val.ArticleType.TypeName}}</td>
                 </tr>
             {{end}}
         </table>
 
         <ul class="pagenation">
             <li><a href="/Index?pageIndex=1">首页</a></li>
-           {{/* <li><a href="/Index?pageIndex={{.pageIndex | PrePage}}">上一页 </a></li>
+            {{/* <li><a href="/Index?pageIndex={{.pageIndex | PrePage}}">上一页 </a></li>
             <li><a href="/Index?pageIndex={{.pageIndex | NextPage}}">下一页</a></li>*/}}
             <li><a href="/Index?pageIndex={{.pagecount}}">末页</a></li>
             <li>共{{.count}}条记录/共{{.pagecount}}页/当前1页</li>
