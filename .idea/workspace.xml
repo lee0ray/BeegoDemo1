@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8bf4a7c-0670-4aa1-b7a5-1631580c5a34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/commands/commands.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/IndexC.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/IndexC.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/contentC.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/contentC.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/IndexM.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/IndexM.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/20190420213216.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/20190420213434.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/20190421183519.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/20190422233136.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/addType.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/addType.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/content.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/update.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
