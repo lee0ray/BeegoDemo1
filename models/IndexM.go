@@ -9,4 +9,11 @@ type Article struct {
 	ACount   int`orm:"default(0);null"`
 	AContent string
 	AImg     string
+	ArticleType *ArticleType`orm:"rel(fk)"`
+}
+
+type ArticleType struct {
+	Id int
+	typeName string`orm:"size(20)"`
+	Articles []*Article`orm:"reverse(many)"`
 }

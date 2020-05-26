@@ -3,8 +3,10 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
+	"math"
 	"myfirst/models"
 	"path"
+	"strconv"
 	"time"
 )
 
@@ -17,12 +19,30 @@ func (c *IndexController) Get() {
 	o := orm.NewOrm()
 
 	var articles []models.Article
-	_, err := o.QueryTable("article").All(&articles)
-	if err != nil {
+	qs:= o.QueryTable("article")
+	//qs.All(&articles)
+	count,err := qs.Count()
+	if err!=nil{
 		beego.Info(err)
 	}
-	c.Data["articles"] = articles
+	//set page
+	var PageIndex1 int
+	PageIndex :=c.GetString("pageIndex")
+	PageIndex1,err =strconv.Atoi(PageIndex)
+	if err!=nil{
+		PageIndex1 =1
+		beego.Info(err)
+	}
 
+	beego.Info(count)
+	PageSize:= 3
+	start:= PageSize*(PageIndex1-1)
+	pageCount := math.Ceil(float64(count)/float64(PageSize))
+	qs.Limit(PageSize,start).All(&articles)
+	//
+	c.Data["articles"] = articles
+	c.Data["count"] = count
+	c.Data["pagecount"] = pageCount
 	c.TplName = "index.html"
 }
 
@@ -77,5 +97,22 @@ func (c *IndexController) AddArticle() {
 	if err != nil {
 		beego.Info(err)
 	}
-	c.Redirect("/AddArticle", 302)
+	c.Redirect("/Index", 302)
+}
+
+func (c *IndexController) HandleDelete() {
+	Id, err := c.GetInt("id")
+	if err != nil {
+		beego.Info(err)
+	}
+
+	o := orm.NewOrm()
+	Article := models.Article{Id: Id}
+	err = o.Read(&Article)
+	if err != nil {
+		beego.Info(err)
+	} else {
+		o.Delete(&Article)
+		c.Redirect("/Index",302)
+	}
 }
