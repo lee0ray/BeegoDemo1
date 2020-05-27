@@ -27,9 +27,22 @@ func (c *IndexController) Get() {
 	qs := o.QueryTable("article")
 	//qs.All(&articles)
 	count, err := qs.Count()
+<<<<<<< HEAD
 	if err != nil {
 		beego.Info(err)
 	}
+	//set page
+	var PageIndex1 int
+	PageIndex := c.GetString("pageIndex")
+	PageIndex1, err = strconv.Atoi(PageIndex)
+=======
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
+	if err != nil {
+		PageIndex1 = 1
+		beego.Info(err)
+	}
+<<<<<<< HEAD
+=======
 	//set page
 	var PageIndex1 int
 	PageIndex := c.GetString("pageIndex")
@@ -38,6 +51,7 @@ func (c *IndexController) Get() {
 		PageIndex1 = 1
 		beego.Info(err)
 	}
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 
 	beego.Info(count)
 	PageSize := 3
@@ -48,7 +62,10 @@ func (c *IndexController) Get() {
 	var types []models.ArticleType
 	qs1 := o.QueryTable("ArticleType")
 	qs1.All(&types)
+<<<<<<< HEAD
 	beego.Info(types)
+=======
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 	c.Data["types"] = types
 	//
 	c.Data["articles"] = articles
@@ -64,6 +81,7 @@ func (c *IndexController) Post() {
 	if typeName == "" {
 		beego.Info("submit type failed")
 	}
+<<<<<<< HEAD
 
 	o := orm.NewOrm()
 
@@ -92,6 +110,35 @@ func (c *IndexController) Post() {
 	beego.Info(types)
 	//insert data in Html
 
+=======
+
+	o := orm.NewOrm()
+
+	var PageIndex1 int
+	var types []models.ArticleType
+	var articles []models.Article
+	PageIndex := c.GetString("pageIndex")
+	PageIndex1, err := strconv.Atoi(PageIndex)
+	if err != nil {
+		PageIndex1 = 1
+		beego.Info(err)
+	}
+
+	qs := o.QueryTable("Article")
+	qs.RelatedSel("ArticleType").Filter("ArticleType__TypeName", typeName).All(&articles)
+	count := len(articles)
+	PageSize := 3
+	start := PageSize * (PageIndex1 - 1)
+	pageCount := math.Ceil(float64(count) / float64(PageSize))
+	qs = o.QueryTable("Article")
+	qs.Limit(PageSize, start).RelatedSel("ArticleType").Filter("ArticleType__TypeName", typeName).All(&articles)
+	beego.Info(articles)
+	beego.Info(len(articles))
+	qs1 := o.QueryTable("ArticleType")
+	qs1.All(&types)
+	//
+	c.Data["articles"] = articles
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 	c.Data["types"] = types
 	//
 	c.Data["articles"] = articles
@@ -119,9 +166,14 @@ func (c *IndexController) AddArticle() {
 	AContent := c.GetString("content")
 	//get image
 	f, h, err := c.GetFile("uploadname")
+<<<<<<< HEAD
 	if err != nil {
 		beego.Info(err)
 		c.Redirect("/AddArticle", 302)
+=======
+	if err!=nil{
+		beego.Info(err)
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 	}
 	defer f.Close()
 	//limit format
@@ -178,6 +230,10 @@ func (c *IndexController) AddArticle() {
 		beego.Info(err)
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 	c.Redirect("/Index", 302)
 }
 
@@ -250,10 +306,13 @@ func (c *IndexController) DeleteType() {
 		}
 	}
 
+<<<<<<< HEAD
 }
 
 //logout control
 func (c IndexController) Logout() {
 	c.DelSession("userName")
 	c.Redirect("/Login", 302)
+=======
+>>>>>>> 7a2c127433db0dae5e47008e274b99ea67a2611b
 }
