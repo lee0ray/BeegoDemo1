@@ -10,11 +10,12 @@ type User struct {
 	Id       int
 	Name     string
 	Password string
+	Articles []*Article `orm:"rel(m2m)"`
 }
 
 type Test struct {
-	Id int
-	Time time.Time`orm:"auto_now"`
+	Id   int
+	Time time.Time `orm:"auto_now"`
 }
 
 func init() {
@@ -29,9 +30,9 @@ func init() {
 	orm.RunSyncdb("default", false, true)
 }
 
-func TestCRUD()  {
-	o :=orm.NewOrm()
-	qs :=o.QueryTable("demo")
-	qs.Filter("id",1)
+func TestCRUD() {
+	o := orm.NewOrm()
+	qs := o.QueryTable("demo")
+	qs.Filter("id", 1)
 
 }

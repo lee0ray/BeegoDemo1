@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"myfirst/models"
+	"time"
 )
 
 type RegisterController struct {
@@ -46,6 +47,12 @@ func (c *RegisterController) Post() {
 }
 
 func (c *RegisterController) Login() {
+	userName := c.Ctx.GetCookie("userName")
+	if userName == ""{
+		beego.Info("no cookie")
+	}else {
+		c.Data["userName"] = userName
+	}
 	c.TplName = "Login.html"
 }
 
@@ -73,5 +80,15 @@ func (c *RegisterController) LoginPost() {
 		c.Ctx.WriteString("wrong password")
 		c.Redirect("/Login", 302)
 	}
+	// check selection of rememeber me
+	remember:=c.GetString("remember")
+	beego.Info(remember)
+	if remember =="on"{
+		c.Ctx.SetCookie("userName",UserName,time.Second*3600)
+	}else {
+		c.Ctx.SetCookie("userName",UserName,-1)
+	}
+
+	c.SetSession("userName",UserName)
 	c.Redirect("/Index", 302)
 }
