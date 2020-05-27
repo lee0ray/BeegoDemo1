@@ -20,4 +20,5 @@ func init() {
 	beego.Router("/deleteType",&controllers.IndexController{},"Get:DeleteType")
 	beego.Router("/Logout",&controllers.IndexController{},"Get:Logout")
 
+
 }

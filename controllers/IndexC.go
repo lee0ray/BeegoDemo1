@@ -40,7 +40,6 @@ func (c *IndexController) Get() {
 		PageIndex1 = 1
 		beego.Info(err)
 	}
-
 	beego.Info(count)
 	PageSize := 3
 	start := PageSize * (PageIndex1 - 1)
@@ -52,7 +51,6 @@ func (c *IndexController) Get() {
 	qs1.All(&types)
 
 	beego.Info(types)
-
 	c.Data["types"] = types
 	//
 	c.Data["articles"] = articles
@@ -68,7 +66,6 @@ func (c *IndexController) Post() {
 	if typeName == "" {
 		beego.Info("submit type failed")
 	}
-
 
 	o := orm.NewOrm()
 
@@ -96,7 +93,6 @@ func (c *IndexController) Post() {
 	qs1.All(&types)
 	beego.Info(types)
 	//insert data in Html
-
 
 	c.Data["types"] = types
 	//
@@ -185,7 +181,6 @@ func (c *IndexController) AddArticle() {
 	if err != nil {
 		beego.Info(err)
 	}
-	
 	c.Redirect("/Index", 302)
 }
 
